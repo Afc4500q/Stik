@@ -358,7 +358,7 @@
 
   <script>
     // ==========================================
-    // ⚙️ إعدادات Sheetson API
+    // ⚙️ إعدادات Sheetson API الخاصة بك
     // ==========================================
     const API_KEY = 'S9vNSXvkG_2CSvbTVaqMtka181SQYIfdd5iZ0n-0_ZYR4x_g8J8lUt4AyhE'; 
     const SPREADSHEET_ID = '1-8kewS_N_Duf4RBU3VEy26kF42_5SsZ3VMGdT_9AhE8';
@@ -373,7 +373,6 @@
 
     let tasks = [];
 
-    // ضبط الخيارات بناءً على المادة (عملي أو نظري)
     function handleSubjectChange() {
       const subject = document.getElementById('subject').value;
       const optPractical = document.getElementById('optPractical');
@@ -387,20 +386,26 @@
       }
     }
 
-    // جلب البيانات من Google Sheet
+    // جلب البيانات مع فحص الاستجابة
     async function fetchTasks() {
+      const listEl = document.getElementById('tasksList');
       try {
         const response = await fetch(`${BASE_URL}?limit=100`, { headers });
         const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || `خطأ ${response.status}`);
+        }
+
         tasks = data.results || [];
         renderTasks();
       } catch (err) {
         console.error(err);
-        document.getElementById('tasksList').innerHTML = `<div class="empty-state">حدث خطأ أثناء تحميل البيانات. تأكد من إعدادات المفاتيح.</div>`;
+        listEl.innerHTML = `<div class="empty-state" style="color:#ef4444;">تعذر الاتصال بـ Sheetson: ${err.message}</div>`;
       }
     }
 
-    // عرض المهام مع الفلترة
+    // عرض المهام
     function renderTasks() {
       const listEl = document.getElementById('tasksList');
       const filterSubject = document.getElementById('filterSubject').value;
@@ -408,44 +413,59 @@
       const filterStatus = document.getElementById('filterStatus').value;
 
       const filtered = tasks.filter(t => {
-        const matchSub = filterSubject === 'ALL' || t.Subject === filterSubject;
-        const matchType = filterType === 'ALL' || t.TaskType === filterType;
-        const matchStatus = filterStatus === 'ALL' || t.Status === filterStatus;
+        const subj = t.Subject || t.subject || '';
+        const type = t.TaskType || t.tasktype || '';
+        const status = t.Status || t.status || 'قيد الانتظار';
+
+        const matchSub = filterSubject === 'ALL' || subj === filterSubject;
+        const matchType = filterType === 'ALL' || type === filterType;
+        const matchStatus = filterStatus === 'ALL' || status === filterStatus;
         return matchSub && matchType && matchStatus;
       });
 
       document.getElementById('taskCount').textContent = `العدد: ${filtered.length}`;
 
       if (filtered.length === 0) {
-        listEl.innerHTML = `<div class="empty-state">لا توجد مهام مطابقة للمحددات الحالية.</div>`;
+        listEl.innerHTML = `<div class="empty-state">لا توجد مهام مسجلة حتى الآن.</div>`;
         return;
       }
 
-      listEl.innerHTML = filtered.map(t => `
-        <div class="task-card ${t.Status === 'مكتمل' ? 'completed' : 'pending'}">
-          <div class="task-header">
-            <span class="task-title">${t.Title}</span>
-            <div class="badges">
-              <span class="badge badge-subject">${t.Subject}</span>
-              <span class="badge badge-section">${t.Section}</span>
-              <span class="badge badge-type">${t.TaskType}</span>
+      listEl.innerHTML = filtered.map(t => {
+        const title = t.Title || t.title || 'بدون عنوان';
+        const subj = t.Subject || t.subject || '-';
+        const sec = t.Section || t.section || '-';
+        const type = t.TaskType || t.tasktype || '-';
+        const date = t.DueDate || t.duedate || 'غير محدد';
+        const status = t.Status || t.status || 'قيد الانتظار';
+        const notes = t.Notes || t.notes || '';
+        const row = t.rowIndex;
+
+        return `
+          <div class="task-card ${status === 'مكتمل' ? 'completed' : 'pending'}">
+            <div class="task-header">
+              <span class="task-title">${title}</span>
+              <div class="badges">
+                <span class="badge badge-subject">${subj}</span>
+                <span class="badge badge-section">${sec}</span>
+                <span class="badge badge-type">${type}</span>
+              </div>
+            </div>
+            <div class="task-meta">
+              <span>📅 موعد التسليم: ${date}</span>
+              <span>📌 الحالة: <strong>${status}</strong></span>
+            </div>
+            ${notes ? `<div class="task-notes">📝 ${notes}</div>` : ''}
+            <div class="task-actions">
+              <button class="btn-action btn-toggle" onclick="toggleStatus('${row}', '${status}')">
+                ${status === 'مكتمل' ? 'تحديد كـ غير مكتمل ⏳' : 'تحديد كـ مكتمل ✅'}
+              </button>
             </div>
           </div>
-          <div class="task-meta">
-            <span>📅 التسليم: ${t.DueDate || 'غير محدد'}</span>
-            <span>📌 الحالة: <strong>${t.Status || 'قيد الانتظار'}</strong></span>
-          </div>
-          ${t.Notes ? `<div class="task-notes">📝 ${t.Notes}</div>` : ''}
-          <div class="task-actions">
-            <button class="btn-action btn-toggle" onclick="toggleStatus('${t.rowIndex}', '${t.Status}')">
-              ${t.Status === 'مكتمل' ? 'تحديد كـ غير مكتمل ⏳' : 'تحديد كـ مكتمل ✅'}
-            </button>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
-    // إضافة مهمة جديدة
+    // إرسال البيانات وحفظها
     document.getElementById('taskForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
@@ -470,23 +490,24 @@
           body: JSON.stringify(newTask)
         });
 
+        const resultData = await res.json();
+
         if (res.ok) {
+          alert('تمت إضافة المهمة بنجاح! ✅');
           document.getElementById('taskForm').reset();
           handleSubjectChange();
           await fetchTasks();
         } else {
-          alert('حدث خطأ أثناء الإضافة، تأكد من مطابقة أسماء الأعمدة في Google Sheet.');
+          alert(`فشل الحفظ: ${resultData.message || res.statusText}`);
         }
       } catch (err) {
-        console.error(err);
-        alert('تعذر الاتصال بـ Sheetson.');
+        alert(`خطأ في الشبكة أو الاتصال: ${err.message}`);
       } finally {
         btn.disabled = false;
         btn.textContent = 'حفظ المهمة ➕';
       }
     });
 
-    // تحديث حالة المهمة
     async function toggleStatus(rowIndex, currentStatus) {
       if (!rowIndex) return;
       const newStatus = currentStatus === 'مكتمل' ? 'قيد الانتظار' : 'مكتمل';
@@ -499,14 +520,14 @@
         });
         await fetchTasks();
       } catch (err) {
-        console.error(err);
         alert('حدث خطأ أثناء تحديث الحالة.');
       }
     }
 
-    // بدء التشغيل
+    // التشغيل المبدئي
     handleSubjectChange();
     fetchTasks();
   </script>
+
 </body>
 </html>
