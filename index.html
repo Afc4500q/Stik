@@ -33,41 +33,25 @@
       min-height: 100vh;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
+    .container { max-width: 1100px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2rem; }
     header h1 {
       font-size: 2rem;
       font-weight: 800;
       color: var(--primary);
       margin-bottom: 0.5rem;
     }
+    header p { color: var(--text-muted); }
 
-    header p {
-      color: var(--text-muted);
-    }
-
-    /* Layout */
     .dashboard-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
-
     @media (min-width: 900px) {
-      .dashboard-grid {
-        grid-template-columns: 360px 1fr;
-      }
+      .dashboard-grid { grid-template-columns: 360px 1fr; }
     }
 
-    /* Cards */
     .card {
       background-color: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -75,7 +59,6 @@
       padding: 1.25rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-
     .card h2 {
       font-size: 1.25rem;
       margin-bottom: 1rem;
@@ -86,18 +69,13 @@
       align-items: center;
     }
 
-    /* Forms */
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
+    .form-group { margin-bottom: 1rem; }
     label {
       display: block;
       margin-bottom: 0.4rem;
       font-size: 0.9rem;
       color: var(--text-muted);
     }
-
     input, select, textarea {
       width: 100%;
       padding: 0.7rem;
@@ -109,11 +87,7 @@
       outline: none;
       transition: border-color 0.2s;
     }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--primary);
-    }
-
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
     button.btn {
       width: 100%;
       background-color: var(--primary);
@@ -126,35 +100,19 @@
       cursor: pointer;
       transition: background-color 0.2s, transform 0.1s;
     }
+    button.btn:hover { background-color: var(--primary-hover); }
+    button.btn:active { transform: scale(0.98); }
+    button.btn:disabled { opacity: 0.65; cursor: wait; }
 
-    button.btn:hover {
-      background-color: var(--primary-hover);
-    }
-
-    button.btn:active {
-      transform: scale(0.98);
-    }
-
-    /* Filters & Search */
     .filters {
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
       margin-bottom: 1.25rem;
     }
+    .filters select, .filters input { flex: 1; min-width: 140px; }
 
-    .filters select, .filters input {
-      flex: 1;
-      min-width: 140px;
-    }
-
-    /* Task List */
-    .tasks-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
+    .tasks-container { display: flex; flex-direction: column; gap: 1rem; }
     .task-card {
       background-color: #162032;
       border: 1px solid var(--card-border);
@@ -165,67 +123,43 @@
       gap: 0.5rem;
       position: relative;
     }
-
-    .task-card.completed {
-      border-right: 4px solid var(--success);
-      opacity: 0.75;
-    }
-
-    .task-card.pending {
-      border-right: 4px solid var(--warning);
-    }
-
+    .task-card.completed { border-right: 4px solid var(--success); opacity: 0.75; }
+    .task-card.pending { border-right: 4px solid var(--warning); }
     .task-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
-    }
-
-    .task-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    .badges {
-      display: flex;
-      gap: 0.5rem;
       flex-wrap: wrap;
     }
-
+    .task-title { font-weight: 700; font-size: 1.1rem; overflow-wrap: anywhere; }
+    .badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .badge {
       font-size: 0.75rem;
       padding: 0.2rem 0.6rem;
       border-radius: 6px;
       font-weight: 600;
     }
-
     .badge-subject { background-color: #3b82f6; color: white; }
     .badge-section { background-color: #6366f1; color: white; }
     .badge-type { background-color: #8b5cf6; color: white; }
-
     .task-meta {
       font-size: 0.85rem;
       color: var(--text-muted);
       display: flex;
       gap: 1rem;
       align-items: center;
+      flex-wrap: wrap;
     }
-
     .task-notes {
       font-size: 0.9rem;
       color: #cbd5e1;
       background: #0f172a;
       padding: 0.5rem 0.75rem;
       border-radius: 6px;
+      overflow-wrap: anywhere;
     }
-
-    .task-actions {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
+    .task-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
     .btn-action {
       padding: 0.4rem 0.8rem;
       font-size: 0.85rem;
@@ -234,25 +168,12 @@
       cursor: pointer;
       font-weight: 600;
     }
-
-    .btn-toggle {
-      background-color: var(--card-border);
-      color: var(--text);
-    }
-
-    .btn-toggle:hover {
-      background-color: #475569;
-    }
-
-    .empty-state {
-      text-align: center;
-      color: var(--text-muted);
-      padding: 2.5rem;
-    }
+    .btn-toggle { background-color: var(--card-border); color: var(--text); }
+    .btn-toggle:hover { background-color: #475569; }
+    .empty-state { text-align: center; color: var(--text-muted); padding: 2.5rem; }
   </style>
 </head>
 <body>
-
   <div class="container">
     <header>
       <h1>📚 إدارة الواجبات والتقارير</h1>
@@ -260,12 +181,11 @@
     </header>
 
     <div class="dashboard-grid">
-      <!-- نموذج إضافة مهمة -->
       <div class="card">
         <h2>إضافة مهمة جديدة</h2>
         <form id="taskForm">
           <div class="form-group">
-            <label>المادة الدراسية</label>
+            <label for="subject">المادة الدراسية</label>
             <select id="subject" required onchange="handleSubjectChange()">
               <option value="" disabled selected>اختر المادة...</option>
               <option value="تعلم الاله">تعلم الاله</option>
@@ -279,7 +199,7 @@
           </div>
 
           <div class="form-group">
-            <label>القسم</label>
+            <label for="section">القسم</label>
             <select id="section" required>
               <option value="نظري">نظري</option>
               <option value="عملي" id="optPractical">عملي</option>
@@ -287,7 +207,7 @@
           </div>
 
           <div class="form-group">
-            <label>نوع المهمة</label>
+            <label for="taskType">نوع المهمة</label>
             <select id="taskType" required>
               <option value="واجب">واجب</option>
               <option value="تقرير">تقرير</option>
@@ -297,17 +217,17 @@
           </div>
 
           <div class="form-group">
-            <label>عنوان / موضوع المهمة</label>
+            <label for="title">عنوان / موضوع المهمة</label>
             <input type="text" id="title" placeholder="مثلاً: التقرير الأول لمخططات التردد" required>
           </div>
 
           <div class="form-group">
-            <label>موعد التسليم (Due Date)</label>
+            <label for="dueDate">موعد التسليم</label>
             <input type="date" id="dueDate" required>
           </div>
 
           <div class="form-group">
-            <label>ملاحظات إضافية</label>
+            <label for="notes">ملاحظات إضافية</label>
             <textarea id="notes" rows="3" placeholder="أي تفاصيل خاصة بالتسليم أو المتطلبات..."></textarea>
           </div>
 
@@ -315,15 +235,14 @@
         </form>
       </div>
 
-      <!-- قائمة المهام والفلترة -->
       <div class="card">
         <h2>
           <span>قائمة المهام</span>
-          <span id="taskCount" style="font-size: 0.9rem; color: var(--primary);"></span>
+          <span id="taskCount" style="font-size:0.9rem;color:var(--primary)"></span>
         </h2>
 
         <div class="filters">
-          <select id="filterSubject" onchange="renderTasks()">
+          <select id="filterSubject" aria-label="تصفية حسب المادة" onchange="renderTasks()">
             <option value="ALL">جميع المواد</option>
             <option value="تعلم الاله">تعلم الاله</option>
             <option value="نظم واشارات">نظم واشارات</option>
@@ -334,7 +253,7 @@
             <option value="ادارة بيانات">ادارة بيانات</option>
           </select>
 
-          <select id="filterType" onchange="renderTasks()">
+          <select id="filterType" aria-label="تصفية حسب النوع" onchange="renderTasks()">
             <option value="ALL">جميع الأنواع</option>
             <option value="واجب">واجب</option>
             <option value="تقرير">تقرير</option>
@@ -342,7 +261,7 @@
             <option value="مشروع">مشروع</option>
           </select>
 
-          <select id="filterStatus" onchange="renderTasks()">
+          <select id="filterStatus" aria-label="تصفية حسب الحالة" onchange="renderTasks()">
             <option value="ALL">جميع الحالات</option>
             <option value="قيد الانتظار">قيد الانتظار</option>
             <option value="مكتمل">مكتمل</option>
@@ -357,177 +276,269 @@
   </div>
 
   <script>
-    // ==========================================
-    // ⚙️ إعدادات Sheetson API الخاصة بك
-    // ==========================================
-    const API_KEY = 'S9vNSXvkG_2CSvbTVaqMtka181SQYIfdd5iZ0n-0_ZYR4x_g8J8lUt4AyhE'; 
+    /*
+      تنبيه أمني:
+      لا تضع مفتاح API في موقع عام. الأفضل نقل طلبات Sheetson إلى خادم وسيط.
+      إذا كان المفتاح السابق حقيقياً، ألغِه وأنشئ مفتاحاً جديداً.
+    */
+    const API_KEY = 'PASTE_YOUR_NEW_SHEETSON_API_KEY_HERE';
     const SPREADSHEET_ID = '1-8kewS_N_Duf4RBU3VEy26kF42_5SsZ3VMGdT_9AhE8';
     const SHEET_NAME = 'Sheet1';
-    const BASE_URL = `https://api.sheetson.com/v2/sheets/${SHEET_NAME}`;
+    const BASE_URL = `https://api.sheetson.com/v2/sheets/${encodeURIComponent(SHEET_NAME)}`;
 
     const headers = {
       'Authorization': `Bearer ${API_KEY}`,
       'X-Spreadsheet-Id': SPREADSHEET_ID,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     };
 
     let tasks = [];
+    let isSubmitting = false;
 
     function handleSubjectChange() {
       const subject = document.getElementById('subject').value;
-      const optPractical = document.getElementById('optPractical');
+      const practicalOption = document.getElementById('optPractical');
       const sectionSelect = document.getElementById('section');
+      const practicalAllowed = subject === 'تعلم الاله' || subject === 'نظم واشارات';
 
-      if (subject === 'تعلم الاله' || subject === 'نظم واشارات') {
-        optPractical.style.display = 'block';
-      } else {
-        optPractical.style.display = 'none';
+      practicalOption.hidden = !practicalAllowed;
+      if (!practicalAllowed && sectionSelect.value === 'عملي') {
         sectionSelect.value = 'نظري';
       }
     }
 
-    // جلب البيانات مع فحص الاستجابة
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[char]);
+    }
+
+    function getField(row, ...keys) {
+      for (const key of keys) {
+        if (row && row[key] !== undefined && row[key] !== null && row[key] !== '') {
+          return row[key];
+        }
+      }
+      return '';
+    }
+
+    async function readResponse(response) {
+      const raw = await response.text();
+      let data = {};
+      if (raw.trim()) {
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          data = { raw };
+        }
+      }
+      if (!response.ok) {
+        const message = data.message || data.error || data.raw || `HTTP ${response.status}`;
+        throw new Error(String(message));
+      }
+      return { data, raw };
+    }
+
     async function fetchTasks() {
       const listEl = document.getElementById('tasksList');
+      listEl.innerHTML = '<div class="empty-state">جاري تحميل المهام...</div>';
+
       try {
-        const response = await fetch(`${BASE_URL}?limit=100`, { headers });
-        const data = await response.json();
-        
-        if (!response.ok) {
-          throw new Error(data.message || `خطأ ${response.status}`);
+        const response = await fetch(`${BASE_URL}?limit=100`, {
+          method: 'GET',
+          headers,
+          cache: 'no-store'
+        });
+        const { data } = await readResponse(response);
+
+        // Sheetson عادةً يعيد الصفوف داخل results؛ ندعم أيضاً أشكال الاستجابة الشائعة.
+        let rows = Array.isArray(data.results) ? data.results
+          : Array.isArray(data.data) ? data.data
+          : Array.isArray(data) ? data
+          : null;
+
+        if (!rows) {
+          console.error('صيغة استجابة GET غير متوقعة:', data);
+          throw new Error('استجابة القراءة لا تحتوي قائمة صفوف معروفة. راجع Console.');
         }
 
-        tasks = data.results || [];
+        tasks = rows;
         renderTasks();
-      } catch (err) {
-        console.error(err);
-        listEl.innerHTML = `<div class="empty-state" style="color:#ef4444;">تعذر الاتصال بـ Sheetson: ${err.message}</div>`;
+      } catch (error) {
+        console.error('خطأ تحميل المهام:', error);
+        listEl.innerHTML = `<div class="empty-state" style="color:#ef4444">تعذر تحميل المهام: ${escapeHtml(error.message)}</div>`;
+        document.getElementById('taskCount').textContent = '';
       }
     }
 
-    // عرض المهام
     function renderTasks() {
       const listEl = document.getElementById('tasksList');
       const filterSubject = document.getElementById('filterSubject').value;
       const filterType = document.getElementById('filterType').value;
       const filterStatus = document.getElementById('filterStatus').value;
 
-      const filtered = tasks.filter(t => {
-        const subj = t.Subject || t.subject || '';
-        const type = t.TaskType || t.tasktype || '';
-        const status = t.Status || t.status || 'قيد الانتظار';
+      const filtered = tasks.filter(task => {
+        const subject = getField(task, 'Subject', 'subject');
+        const type = getField(task, 'TaskType', 'tasktype', 'task_type');
+        const status = getField(task, 'Status', 'status') || 'قيد الانتظار';
 
-        const matchSub = filterSubject === 'ALL' || subj === filterSubject;
-        const matchType = filterType === 'ALL' || type === filterType;
-        const matchStatus = filterStatus === 'ALL' || status === filterStatus;
-        return matchSub && matchType && matchStatus;
+        return (filterSubject === 'ALL' || subject === filterSubject)
+          && (filterType === 'ALL' || type === filterType)
+          && (filterStatus === 'ALL' || status === filterStatus);
       });
 
       document.getElementById('taskCount').textContent = `العدد: ${filtered.length}`;
 
-      if (filtered.length === 0) {
-        listEl.innerHTML = `<div class="empty-state">لا توجد مهام مسجلة حتى الآن.</div>`;
+      if (!filtered.length) {
+        listEl.innerHTML = '<div class="empty-state">لا توجد مهام مطابقة للفلاتر الحالية.</div>';
         return;
       }
 
-      listEl.innerHTML = filtered.map(t => {
-        const title = t.Title || t.title || 'بدون عنوان';
-        const subj = t.Subject || t.subject || '-';
-        const sec = t.Section || t.section || '-';
-        const type = t.TaskType || t.tasktype || '-';
-        const date = t.DueDate || t.duedate || 'غير محدد';
-        const status = t.Status || t.status || 'قيد الانتظار';
-        const notes = t.Notes || t.notes || '';
-        const row = t.rowIndex;
+      listEl.innerHTML = filtered.map(task => {
+        const title = escapeHtml(getField(task, 'Title', 'title') || 'بدون عنوان');
+        const subject = escapeHtml(getField(task, 'Subject', 'subject') || '-');
+        const section = escapeHtml(getField(task, 'Section', 'section') || '-');
+        const type = escapeHtml(getField(task, 'TaskType', 'tasktype', 'task_type') || '-');
+        const date = escapeHtml(getField(task, 'DueDate', 'duedate', 'dueDate', 'due_date') || 'غير محدد');
+        const status = getField(task, 'Status', 'status') || 'قيد الانتظار';
+        const safeStatus = escapeHtml(status);
+        const notes = escapeHtml(getField(task, 'Notes', 'notes'));
+        const rowIndex = getField(task, 'rowIndex', 'rowindex', 'row_index');
+        const safeRow = escapeHtml(rowIndex);
 
         return `
           <div class="task-card ${status === 'مكتمل' ? 'completed' : 'pending'}">
             <div class="task-header">
               <span class="task-title">${title}</span>
               <div class="badges">
-                <span class="badge badge-subject">${subj}</span>
-                <span class="badge badge-section">${sec}</span>
+                <span class="badge badge-subject">${subject}</span>
+                <span class="badge badge-section">${section}</span>
                 <span class="badge badge-type">${type}</span>
               </div>
             </div>
             <div class="task-meta">
               <span>📅 موعد التسليم: ${date}</span>
-              <span>📌 الحالة: <strong>${status}</strong></span>
+              <span>📌 الحالة: <strong>${safeStatus}</strong></span>
             </div>
             ${notes ? `<div class="task-notes">📝 ${notes}</div>` : ''}
-            <div class="task-actions">
-              <button class="btn-action btn-toggle" onclick="toggleStatus('${row}', '${status}')">
-                ${status === 'مكتمل' ? 'تحديد كـ غير مكتمل ⏳' : 'تحديد كـ مكتمل ✅'}
-              </button>
-            </div>
+            ${safeRow ? `
+              <div class="task-actions">
+                <button class="btn-action btn-toggle" type="button"
+                  onclick="toggleStatus('${safeRow}', '${escapeHtml(status)}')">
+                  ${status === 'مكتمل' ? 'تحديد كـ غير مكتمل ⏳' : 'تحديد كـ مكتمل ✅'}
+                </button>
+              </div>` : ''}
           </div>
         `;
       }).join('');
     }
 
-    // إرسال البيانات وحفظها
-    document.getElementById('taskForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = 'جاري الحفظ في الشيت...';
+    document.getElementById('taskForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      if (isSubmitting) return;
+
+      if (API_KEY === 'PASTE_YOUR_NEW_SHEETSON_API_KEY_HERE') {
+        alert('أدخل مفتاح Sheetson الجديد في متغير API_KEY قبل استخدام النموذج.');
+        return;
+      }
+
+      const button = document.getElementById('submitBtn');
+      isSubmitting = true;
+      button.disabled = true;
+      button.textContent = 'جاري الحفظ...';
 
       const newTask = {
-        Timestamp: new Date().toLocaleString('ar-IQ'),
+        Timestamp: new Date().toISOString(),
         Subject: document.getElementById('subject').value,
         Section: document.getElementById('section').value,
         TaskType: document.getElementById('taskType').value,
-        Title: document.getElementById('title').value,
+        Title: document.getElementById('title').value.trim(),
         DueDate: document.getElementById('dueDate').value,
         Status: 'قيد الانتظار',
-        Notes: document.getElementById('notes').value
+        Notes: document.getElementById('notes').value.trim()
       };
 
       try {
-        const res = await fetch(BASE_URL, {
+        const response = await fetch(BASE_URL, {
           method: 'POST',
           headers,
           body: JSON.stringify(newTask)
         });
+        const { data, raw } = await readResponse(response);
+        console.log('Sheetson POST status:', response.status);
+        console.log('Sheetson POST response:', data);
 
-        const resultData = await res.json();
+        // بعض واجهات API قد تعيد خطأ تطبيقياً ضمن HTTP 2xx.
+        if (data.error || data.success === false) {
+          throw new Error(data.message || data.error || 'رفضت الخدمة إضافة المهمة.');
+        }
 
-        if (res.ok) {
-          alert('تمت إضافة المهمة بنجاح! ✅');
+        // لا نشترط status 201 أو rowIndex وحدهما؛ نتأكد بقراءة البيانات من المصدر.
+        const oldCount = tasks.length;
+        await fetchTasks();
+
+        const saved = tasks.some(task =>
+          getField(task, 'Title', 'title') === newTask.Title &&
+          getField(task, 'Subject', 'subject') === newTask.Subject &&
+          getField(task, 'DueDate', 'duedate', 'dueDate', 'due_date') === newTask.DueDate
+        );
+
+        if (saved) {
+          alert('تم حفظ المهمة والتحقق من ظهورها في قائمة المهام بنجاح ✅');
           document.getElementById('taskForm').reset();
           handleSubjectChange();
-          await fetchTasks();
         } else {
-          alert(`فشل الحفظ: ${resultData.message || res.statusText}`);
+          console.warn('لم تظهر المهمة بعد POST. عدد الصفوف قبل/بعد:', oldCount, tasks.length, 'POST body:', data, raw);
+          alert(
+            'استجاب الخادم لطلب الحفظ، لكن لم نعثر على المهمة عند إعادة القراءة. ' +
+            'لم نمسح النموذج حتى لا تفقد البيانات. تحقق من اسم الورقة وعناوين الأعمدة واستجابة GET في Console.'
+          );
         }
-      } catch (err) {
-        alert(`خطأ في الشبكة أو الاتصال: ${err.message}`);
+      } catch (error) {
+        console.error('خطأ إضافة المهمة:', error);
+        alert('تعذر تأكيد إضافة المهمة: ' + error.message +
+          '\nلم نمسح النموذج. تحقق من الاتصال ومفتاح API واسم الورقة.');
       } finally {
-        btn.disabled = false;
-        btn.textContent = 'حفظ المهمة ➕';
+        isSubmitting = false;
+        button.disabled = false;
+        button.textContent = 'حفظ المهمة ➕';
       }
     });
 
     async function toggleStatus(rowIndex, currentStatus) {
-      if (!rowIndex) return;
+      if (!rowIndex) {
+        alert('لا يتوفر رقم الصف لهذه المهمة، لذلك لم يتم تحديث الحالة.');
+        return;
+      }
+
       const newStatus = currentStatus === 'مكتمل' ? 'قيد الانتظار' : 'مكتمل';
 
       try {
-        await fetch(`${BASE_URL}/${rowIndex}`, {
+        const response = await fetch(`${BASE_URL}/${encodeURIComponent(rowIndex)}`, {
           method: 'PATCH',
           headers,
           body: JSON.stringify({ Status: newStatus })
         });
+        const { data } = await readResponse(response);
+
+        if (data.error || data.success === false) {
+          throw new Error(data.message || data.error || 'رفضت الخدمة تحديث الحالة.');
+        }
+
         await fetchTasks();
-      } catch (err) {
-        alert('حدث خطأ أثناء تحديث الحالة.');
+      } catch (error) {
+        console.error('خطأ تحديث الحالة:', error);
+        alert('حدث خطأ أثناء تحديث الحالة: ' + error.message);
       }
     }
 
-    // التشغيل المبدئي
     handleSubjectChange();
     fetchTasks();
   </script>
-
 </body>
 </html>
